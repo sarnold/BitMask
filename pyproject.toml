@@ -8,8 +8,8 @@ packages = ["src/BitMask"]
 [project]
 name = "BitMaskFunctionalities"
 version = "1.2.2"
-dependencies = []
-requires-python = ">= 3.11"
+dependencies = ["typing_extensions"]
+requires-python = ">= 3.9"
 authors = [
     { name = "Adam Thieringer", email = "adamt0408@gmail.com" }
 ]
@@ -20,9 +20,12 @@ classifiers = [
     "Development Status :: 5 - Production/Stable"
 ]
 license = "MIT"
-license-files = ["LICENSE.txt"]
 
 [project.urls]
 Repository = "https://github.com/AThieringer/BitMask"
 Download = "https://github.com/AThieringer/BitMask/releases"
 Changelog = "https://github.com/AThieringer/BitMask/blob/master/Changelog"
+
+[tool.bandit]
+exclude_dirs = ["tests",]
+#skips = ["B101"]

@@ -12,12 +12,12 @@ from __future__ import annotations
 
 import warnings
 from collections.abc import Generator
-from typing import Self, TypeAlias
+from typing_extensions import List, Self, Tuple, TypeAlias, Union
 
 __all__ = ["BitMask"]
 _MAX_BITMASK_LENGTH = 1024
 
-IndexFormats: TypeAlias = tuple[int, ...] | list[int]
+IndexFormats: TypeAlias = Union[Tuple[int], List[int]]
 
 
 def _value_validation(value: int, upper_bound: int) -> None:
@@ -514,7 +514,13 @@ class BitMask:
 
         :return: The number of set bits.
         """
-        return self._value.bit_count()
+        temp_value = self._value
+        count = 0
+        while temp_value:
+            temp_value &= temp_value - 1
+            count += 1
+
+        return count
 
     def get_set_bits(self) -> tuple[int, ...]:
         """
